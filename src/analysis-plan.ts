@@ -58,8 +58,11 @@ export function selectRelevantContextFiles(paths: string[], changedPaths: string
   });
 }
 
-export function outputTokenBudget(stage: string) {
-  if (stage.startsWith('final-release-notes-template')) return 4096;
-  if (stage.startsWith('final-release-notes')) return 2048;
+export function outputTokenBudget(stage: string, bilingual = false) {
+  // Two complete language versions need separate output allowances. This does
+  // not change which source changes enter the semantic digest.
+  const versions = bilingual ? 2 : 1;
+  if (stage.startsWith('final-release-notes-template')) return 4096 * versions;
+  if (stage.startsWith('final-release-notes')) return 2048 * versions;
   return 768;
 }
