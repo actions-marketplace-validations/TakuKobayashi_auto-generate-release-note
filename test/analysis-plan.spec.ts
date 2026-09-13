@@ -39,5 +39,7 @@ describe('change analysis planning', () => {
   it('allows complete final and templated responses', () => {
     assert.equal(outputTokenBudget('final-release-notes'), 2048);
     assert.equal(outputTokenBudget('final-release-notes-template'), 4096);
+    assert.equal(outputTokenBudget('final-release-notes', true), 4096);
+    assert.equal(outputTokenBudget('final-release-notes-template', true), 8192);
   });
 });
